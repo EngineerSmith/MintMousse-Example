@@ -1,15 +1,17 @@
 require("mintmousse")
 
+-- love.mintmousse.updateSubscription("dashboard")
+
 -- love.mintmousse.setIcon({
 --   emoji = "🦆",
 --   shape = "rect",
 --   rounded = true,
---   color = "mintcream",
+--   insideColor = "#95d7ab",
 --   outsideColor = "#00FF07",
 --   easterEgg = true
 -- })
 
--- local dbTab = love.mintmousse.newTab("Dashboard")
+local dbTab = love.mintmousse.newTab("Dashboard", "dashboard")
 -- dbTab:insert({
 --   type = "Card",
 --   size = 5,
@@ -29,9 +31,12 @@ require("mintmousse")
 -- })
 
 love.mintmousse.start({
+  -- defaults
+  title = "MintMousse",
   host = "*",
-  port = 80, -- default
-  whitelist = { "127.0.0.1", "192.168.*.*" },
+  httpPort = 80,
+  -- not default
+  whitelist = { "127.0.0.1", "192.168.*.*" }
 })
 
 -- local progressBar = love.mintmousse.get("ProgressBar")
