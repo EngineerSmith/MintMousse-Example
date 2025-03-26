@@ -12,6 +12,9 @@ require("mintmousse")
 -- })
 
 local dbTab = love.mintmousse.newTab("Dashboard", "dashboard")
+local dbTab = love.mintmousse.newTab("Dashboard 2", "dashboard2")
+local dbTab = love.mintmousse.newTab("Dashboard 3", "dashboard3")
+local dbTab = love.mintmousse.newTab("Dashboard 4", "dashboard4")
 -- dbTab:insert({
 --   type = "Card",
 --   size = 5,
