@@ -36,7 +36,7 @@ love.mintmousse.start({
   host = "*",
   httpPort = 80,
   -- not default
-  whitelist = { "127.0.0.1", "192.168.*.*" }
+  whitelist = { "127.0.0.1", "192.168.0.0/16" }
 })
 
 -- local progressBar = love.mintmousse.get("ProgressBar")
