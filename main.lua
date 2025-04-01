@@ -54,17 +54,45 @@ love.mintmousse.start({
 --   end
 -- end
 
-local tab
-local timer = 0
+-- local tab
+-- local timer = 0
+-- love.update = function(dt)
+--   timer = timer + dt
+--   while timer >= 2 do
+--     timer = timer - 2
+--     if tab then
+--       tab:remove()
+--       tab = nil
+--     else
+--       tab = love.mintmousse.newTab("Dashboard", "dashboard")
+--     end
+--   end
+-- end
+
+-- local tab = love.mintmousse.newTab("Dashboard", "dashboard")
+-- local timer, flop = 0, false
+-- love.update = function(dt)
+--   timer = timer + dt
+--   while timer >= 2 do
+--     timer = timer - 2
+--     flop = not flop
+--     if flop then
+--       tab.title = "hello"
+--     else
+--       tab.title = "world"
+--     end
+--   end
+-- end
+
+local tab = love.mintmousse.newTab("Dashboard", "dashboard")
+local timer, flop = 0, false
 love.update = function(dt)
   timer = timer + dt
   while timer >= 2 do
     timer = timer - 2
-    if tab then
-      tab:remove()
-      tab = nil
-    else
-      tab = love.mintmousse.newTab("Dashboard", "dashboard")
-    end
+    tab:insert({
+      type = "card",
+      size = love.math.random(1, 3),
+    })
   end
 end
