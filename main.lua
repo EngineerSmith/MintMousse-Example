@@ -19,7 +19,7 @@ require("mintmousse")
 --       type = "CardText",
 --       text = "Hello World!",
 --     }, {
---       id = "ProgressBar",
+--       id = "ProgressBar1",
 --       type = "ProgressBar",
 --       percentage = 0,
 --       label = true,
@@ -30,6 +30,12 @@ require("mintmousse")
 --   },
 -- })
 
+
+-- local dbTab = love.mintmousse.newTab("Dashboard", "dashboard")
+-- local card = dbTab:insertCard({ size = 5 })
+--   :addCardText({ text = "Hello world!" })
+--   :addProgressBar({ id = "ProgressBar1", percentage = 0, label = true, style = { color = "danger" } })
+
 love.mintmousse.start({
   -- defaults
   title = "MintMousse",
@@ -39,7 +45,7 @@ love.mintmousse.start({
   whitelist = { "127.0.0.1", "192.168.0.0/16" }
 })
 
--- local progressBar = love.mintmousse.get("ProgressBar")
+-- local progressBar = love.mintmousse.get("ProgressBar1")
 
 -- local timer, timerFlop = 0, false
 
@@ -85,14 +91,14 @@ love.mintmousse.start({
 -- end
 
 local tab = love.mintmousse.newTab("Dashboard", "dashboard")
+tab:insert({
+  type = "card",
+  size = 1,
+})
 local timer, flop = 0, false
 love.update = function(dt)
   timer = timer + dt
   while timer >= 2 do
     timer = timer - 2
-    tab:insert({
-      type = "card",
-      size = love.math.random(1, 3),
-    })
   end
 end
