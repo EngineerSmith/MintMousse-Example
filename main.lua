@@ -1,5 +1,7 @@
 require("mintmousse")
 
+-- love.mintmousse.updateSubscription("dashboard")
+
 love.mintmousse.start({
   -- defaults
   title = "MintMousse",
@@ -14,7 +16,12 @@ local cardTextID = "example"
 local tab = love.mintmousse.newTab("Dashboard", "dashboard")
 tab:newCard({ size = 2 })
   :addCardText({ id = cardTextID, text = "World" })
-  :addCardText({ text = "Look at me!!" })
+  -- :addProgressBar({
+  --     id = "ProgressBar1",
+  --     percentage = 0,
+  --     label = true,
+  --     style = { color = "danger" },
+  --   })
 
 local cardText = love.mintmousse.get(cardTextID)
 
