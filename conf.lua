@@ -1,5 +1,5 @@
 require("mintmousse.prepare")() -- saves ~2.5ms
 
 love.conf = function(t)
-  t.modules.window = true
+  t.modules.window = false
 end
