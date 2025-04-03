@@ -1,41 +1,5 @@
 require("mintmousse")
 
--- love.mintmousse.updateSubscription("dashboard")
-
--- love.mintmousse.setIcon({
---   emoji = "🦆",
---   shape = "rect",
---   rounded = true,
---   insideColor = "#95d7ab",
---   outsideColor = "#00FF07",
---   easterEgg = true
--- })
-
--- local dbTab = love.mintmousse.newTab("Dashboard", "dashboard")
--- dbTab:insert({
---   type = "Card",
---   size = 5,
---   children = { {
---       type = "CardText",
---       text = "Hello World!",
---     }, {
---       id = "ProgressBar1",
---       type = "ProgressBar",
---       percentage = 0,
---       label = true,
---       style = {
---         color = "danger"
---       },
---     },
---   },
--- })
-
-
--- local dbTab = love.mintmousse.newTab("Dashboard", "dashboard")
--- local card = dbTab:insertCard({ size = 5 })
---   :addCardText({ text = "Hello world!" })
---   :addProgressBar({ id = "ProgressBar1", percentage = 0, label = true, style = { color = "danger" } })
-
 love.mintmousse.start({
   -- defaults
   title = "MintMousse",
@@ -45,60 +9,37 @@ love.mintmousse.start({
   whitelist = { "127.0.0.1", "192.168.0.0/16" }
 })
 
--- local progressBar = love.mintmousse.get("ProgressBar1")
-
--- local timer, timerFlop = 0, false
-
--- love.update = function(dt)
---   timer = timer + dt
---   while timer >= .1 do
---     timer = timer - .1
---     progressBar.percentage = progressBar.percentage + (timerFlop and -1 or 1)
---     if progressBar.percentage >= 100 or progressBar.percentage <= 0 then
---       timerFlop = not timerFlop
---     end
---   end
--- end
-
--- local tab
--- local timer = 0
--- love.update = function(dt)
---   timer = timer + dt
---   while timer >= 2 do
---     timer = timer - 2
---     if tab then
---       tab:remove()
---       tab = nil
---     else
---       tab = love.mintmousse.newTab("Dashboard", "dashboard")
---     end
---   end
--- end
-
--- local tab = love.mintmousse.newTab("Dashboard", "dashboard")
--- local timer, flop = 0, false
--- love.update = function(dt)
---   timer = timer + dt
---   while timer >= 2 do
---     timer = timer - 2
---     flop = not flop
---     if flop then
---       tab.title = "hello"
---     else
---       tab.title = "world"
---     end
---   end
--- end
+local cardTextID = "example"
 
 local tab = love.mintmousse.newTab("Dashboard", "dashboard")
-tab:insert({
-  type = "card",
-  size = 1,
-})
+tab:newCard({ size = 2 })
+  :addCardText({ id = cardTextID, text = "World" })
+  :addCardText({ text = "Look at me!!" })
+
+local cardText = love.mintmousse.get(cardTextID)
+
 local timer, flop = 0, false
 love.update = function(dt)
   timer = timer + dt
   while timer >= 2 do
     timer = timer - 2
+    flop = not flop
+    if flop then
+      cardText.text = "Hello"
+    else
+      cardText.text = "World"
+    end
   end
+end
+
+love.mousepressed = function(_, _, button)
+  if button == 1 then
+    cardText.text = "Mouse button was pressed!"
+    timer = 0
+  end
+end
+
+love.graphics.setNewFont(24)
+love.draw = function()
+  love.graphics.print(love.mouse.isDown(1) and "Mouse is down" or "Mouse is up")
 end
