@@ -1,6 +1,6 @@
 require("mintmousse")
 
--- love.mintmousse.updateSubscription("dashboard")
+love.mintmousse.updateSubscription("dashboard")
 
 love.mintmousse.start({
   -- defaults
@@ -12,9 +12,10 @@ love.mintmousse.start({
 })
 
 local tab = love.mintmousse.newTab("Dashboard", "dashboard")
+tab:newAlert({ id = "alert", size = 5, text = "U've been hacked" })
 local card = tab:newCard({
-    size = 5,
-    isContentCenter = true,
+    size = 3,
+    --isContentCenter = true,
     borderColor = "error",
   })
   :addCardHeader({ text = "header", isTransparent = true })
@@ -29,12 +30,33 @@ local card = tab:newCard({
         isStriped = false,
         color = "danger",
       })
-    .back
+    :addCardText({ text = "I'm below the progress bar" })
+    :addButton({ width = "50" })
+    .back -- same as .parent
   :addCardFooter({ id = "footer", text = "footer" })
 
---local cardText = love.mintmousse.get("example")
---local progressBar = love.mintmousse.get("ProgressBar1")
+tab:newAccordion({ size = 2 })
+  :newContainer({ title = "Let's hope 1", id = "testing" })
+    :addText({ text = "First text?" })
+    :addButton({
+        color = "warning",
+        colorOutline = true,
+        text = "I am a button :>",
+        width = "50",
+      })
+    .back
+  :addText({ title = "Let's hope 2", text = "Second text?" })
+  :addText({ title = "Let's hope 3", text = "Third text?" })
+  :addText({ title = "Let's hope 4", text = "Fourth text?" })
+  :addAlert({ title = "Removable Alert", dismissible = true, text = "I am alert" })
+  :newContainer({ title = "Alert" })
+    :addAlert({ dismissible = true, text = "I am alert" })
 
+tab:newButton({ width = "50", size = 2, text = "How big is this button" })
+
+local cardText = love.mintmousse.get("example")
+local progressBar = love.mintmousse.get("ProgressBar1")
+local alert = love.mintmousse.get("alert")
 local footer = love.mintmousse.get("footer")
 
 local timer, flop = 0, false
@@ -44,33 +66,35 @@ love.update = function(dt)
   local currentInterval = math.floor(timer / 0.1)
   if currentInterval > lastInterval then
     lastInterval = currentInterval
-    --progressBar.percentage = math.max(math.min((timer / 2.8) * 100, 100), 0)
+    progressBar.percentage = math.max(math.min((timer / 2.8) * 100, 100), 0)
   end
   while timer >= 3 do
     timer = timer - 3
     lastInterval = -1
     flop = not flop
+    alert.dismissible = not alert.dismissible
     if flop then
-      --cardText.text = "Hello"
-      --progressBar.isStriped = not progressBar.isStriped
-      --progressBar.color = "danger"
+      cardText.text = "Hello"
+      progressBar.isStriped = not progressBar.isStriped
+      progressBar.color = "danger"
       card.borderColor = "info"
       footer.text = "hello"
-      --love.mintmousse.notify({ title = "MintMousse" })
+      card.size = 2
     else
-      --cardText.text = "World"
-      --progressBar.color = "warning"
+      cardText.text = "World"
+      progressBar.color = "warning"
       card.borderColor = "success"
       footer.text = nil
-      --love.mintmousse.notify({ title = "MintMousse" })
+      card.size = 3
     end
   end
 end
 
 love.mousepressed = function(_, _, button)
   if button == 1 then
-    --cardText.text = "Mouse button was pressed!"
-    love.mintmousse.notify({ title = "MintMousse", text = "Noice" })
+    cardText.text = "Mouse button was pressed!"
+    love.mintmousse.get("testing").title = "Hello world" .. love.math.random(1, 5000)
+    love.mintmousse.notify({ title = "MintMousse", text = "Noice", autoHide = false })
     timer = 0
   end
 end
@@ -84,4 +108,5 @@ end
 
 love.quit = function()
   love.mintmousse.stop()
+  return false
 end
