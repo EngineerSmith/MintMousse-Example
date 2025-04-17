@@ -51,8 +51,30 @@ tab:newAccordion({ size = 2 })
   :addAlert({ title = "Removable Alert", dismissible = true, text = "I am alert" })
   :newContainer({ title = "Alert" })
     :addAlert({ dismissible = true, text = "I am alert" })
+    .back
 
-tab:newButton({ width = "50", size = 2, text = "How big is this button" })
+-- todo
+
+-- tab:newButton({
+--   width = "50",
+--   size = 2,
+--   text = "How big is this button",
+--   callback = function(componentID)
+--     -- if component is removed, the callback will be removed
+--     -- This will be documented, and a configurable behaviour
+--   end,
+-- })
+
+-- tab:newButton({
+--   width = "50",
+--   size = 2,
+--   text = "How big is this button",
+--   callback = "example",
+-- })
+
+-- love.mintmousse.addCallback("example", function(componentID) end)
+-- love.mintmousse.removeCallback("example")
+-- love.mintmousse.handlers["example"] = function(componentID) end
 
 local cardText = love.mintmousse.get("example")
 local progressBar = love.mintmousse.get("ProgressBar1")
