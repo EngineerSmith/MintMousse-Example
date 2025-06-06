@@ -1,5 +1,6 @@
 require("mintmousse")
 
+-- TODO; should updates be implicit for the thread that creates them?
 love.mintmousse.updateSubscription("dashboard")
 
 love.mintmousse.start({
@@ -51,7 +52,7 @@ tab:newAccordion({ size = 2 })
   :addAlert({ title = "Removable Alert", dismissible = true, text = "I am alert" })
   :newContainer({ title = "Alert" })
     :addAlert({ dismissible = true, text = "I am alert" })
-    .back
+    -- .back
 
 -- todo
 
