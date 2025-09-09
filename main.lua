@@ -1,15 +1,12 @@
 require("mintmousse")
 
--- TODO; should updates be implicit for the thread that creates them?
-love.mintmousse.updateSubscription("dashboard")
-
 love.mintmousse.start({
   -- defaults
   title = "MintMousse",
   host = "*",
   httpPort = 80,
   -- not default
-  whitelist = { "127.0.0.1", "192.168.0.0/16" }
+  whitelist = { "127.0.0.1", "192.168.0.0/16" },
 })
 
 local tab = love.mintmousse.newTab("Dashboard", "dashboard")
@@ -32,9 +29,13 @@ local card = tab:newCard({
         color = "danger",
       })
     :addCardText({ text = "I'm below the progress bar" })
-    :addButton({ width = "50" })
+    :addButton({ width = "50", onEventClick = "test" })
     .back -- same as .parent
   :addCardFooter({ id = "footer", text = "footer" })
+
+love.mintmousse.addCallback("test", function(button)
+  button.text = (button.text or "") .. "a"
+end)
 
 tab:newAccordion({ size = 2 })
   :newContainer({ title = "Let's hope 1", id = "testing" })
@@ -54,7 +55,12 @@ tab:newAccordion({ size = 2 })
     :addAlert({ dismissible = true, text = "I am alert" })
     -- .back
 
--- todo
+tab:newList({ size = 5, numbered = true })
+  :addText({ text = "hello 1" })
+  :addText({ text = "hello 2" })
+  :addText({ text = "hello 3" })
+  :addText({ text = "4" })
+  :addText({ text = "5" })
 
 -- tab:newButton({
 --   width = "50",
@@ -74,13 +80,17 @@ tab:newAccordion({ size = 2 })
 -- })
 
 -- love.mintmousse.addCallback("example", function(componentID) end)
--- love.mintmousse.removeCallback("example")
+-- love.mintmousse.removeCallback("example") -> pass nil
 -- love.mintmousse.handlers["example"] = function(componentID) end
 
 local cardText = love.mintmousse.get("example")
 local progressBar = love.mintmousse.get("ProgressBar1")
 local alert = love.mintmousse.get("alert")
 local footer = love.mintmousse.get("footer")
+
+-- temp
+-- love.mintmousse.get("MM_main_6"):remove()
+-- love.mintmousse.get("MM_main_9"):remove()
 
 local timer, flop = 0, false
 local lastInterval = -1
