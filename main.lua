@@ -21,13 +21,24 @@ local card = tab:newCard({
     :addCardTitle({ text = "Title text" })
     :addCardSubtitle({ text = "Subtitle text" })
     :addCardText({ id = "example", text = "World" })
-    :addProgressBar({
-        id = "ProgressBar1",
-        percentage = 0,
-        showLabel = false,
-        isStriped = false,
-        color = "danger",
-      })
+    :newStackedProgressBar()
+      :addProgressBar({
+          id = "ProgressBar1",
+          percentage = 0,
+          showLabel = true,
+          isStriped = false,
+          color = "danger",
+        })
+      :addProgressBar({
+          percentage = 100,
+          showLabel = true,
+        })
+      :addProgressBar({
+          percentage = 100,
+          showLabel = true,
+          color = "secondary",
+        })
+      .back
     :addCardText({ text = "I'm below the progress bar" })
     :addButton({ width = "50", onEventClick = "test" })
     .back -- same as .parent
