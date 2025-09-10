@@ -66,12 +66,30 @@ tab:newAccordion({ size = 2 })
     :addAlert({ dismissible = true, text = "I am alert" })
     -- .back
 
-tab:newList({ size = 5, numbered = true })
+tab:newList({ size = 4, numbered = true })
   :addText({ text = "hello 1" })
   :addText({ text = "hello 2" })
   :addText({ text = "hello 3" })
   :addText({ text = "4" })
   :addText({ text = "5" })
+
+tab:newCard({ size = 1 })
+  :newButtonGroup()
+    :addButton({
+        color = "warning",
+        colorOutline = true,
+        text = "Btn 1",
+      })
+    :addButton({
+        color = "primary",
+        colorOutline = true,
+        text = "Btn 2",
+      })
+    :addButton({
+        color = "success",
+        colorOutline = true,
+        text = "Btn-3",
+      })
 
 -- tab:newButton({
 --   width = "50",
